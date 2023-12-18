@@ -1,6 +1,3 @@
-Dưới đây là đoạn mã Python đã được bổ sung thông tin về tính cách, sở thích và dự đoán tương lai của từng cung hoàng đạo:
-
-```python
 def get_zodiac_sign(name, day, month, year):
     zodiac_signs = {
         'Bảo Bình (Aquarius)': [(1, 20), (2, 16)],
@@ -16,17 +13,15 @@ def get_zodiac_sign(name, day, month, year):
         'Nhân Mã (Sagittarius)': [(11, 23), (12, 17)],
         'Ma Kết (Capricorn)': [(12, 18), (1, 19)]
     }
-    if (month, day) >= zodiac_signs['Song Ngư (Pisces)'][0] and (month, day) <= zodiac_signs['Song Ngư (Pisces)'][1]:
-        sign = "Song Ngư (Pisces)"
-        personality = "Bạn là người nhạy cảm, tình cảm và thích giúp đỡ người khác. Trong tháng này, bạn sẽ có cơ hội để giải quyết những vấn đề khó khăn trong cuộc sống."
-        future_prediction = "Trong tháng này, bạn sẽ gặp nhiều may mắn trong công việc và tình yêu. Hãy tận dụng cơ hội này để đạt được những mục tiêu của mình."
-    elif (month, day) >= zodiac_signs['Bạch Dương (Aries)'][0] and (month, day) <= zodiac_signs['Bạch Dương (Aries)'][1]:
-        sign = "Bạch Dương (Aries)"
-        personality = "Bạn là người năng động, quyết đoán và thích thử thách. Trong tháng này, bạn sẽ có cơ hội để thể hiện tài năng của mình trong công việc và cuộc sống cá nhân."
-        future_prediction = "Trong tháng này, bạn sẽ gặp nhiều thử thách trong công việc và cuộc sống cá nhân. Hãy kiên trì và không bỏ cuộc, bạn sẽ đạt được những mục tiêu của mình."
-    elif (month, day) >= zodiac_signs['Kim Ngưu (Taurus)'][0] and (month, day) <= zodiac_signs['Kim Ngưu (Taurus)'][1]:
-        sign = "Kim Ngưu (Taurus)"
-        personality = "Bạn là người kiên nhẫn, chăm chỉ và thực tế. Trong tháng này, bạn sẽ có cơ hội để phát triển kỹ năng của mình trong công việc và cuộc sống cá nhân."
-        future_prediction = "Trong tháng này, bạn sẽ gặp nhiều cơ hội để phát triển sự nghiệp và tình yêu. Hãy tận dụng cơ hội này để đạt được những mục tiêu của mình."
-    elif (month, day) >= zodiac_signs['Song Tử (Gemini)'][0] and (month, day) <= zodiac_signs['Song Tử (Gemini)'][1]:
-        sign = "Song Tử (Gemini)"
+    for sign, (start, end) in zodiac_signs.items():
+        if (month, day) >= start and (month, day) <= end:
+            return sign
+    return None
+
+name = input("Nhập tên của bạn: ")
+day, month, year = input("Nhập ngày tháng năm sinh của bạn (d/m/yyyy): ").split("/")
+sign = get_zodiac_sign(name, int(day), int(month), int(year))
+if sign is None:
+    print(f"Xin chào {name}, ngày tháng năm sinh của bạn không hợp lệ.")
+else:
+    print(f"Xin chào {name}, cung hoàng đạo của bạn là {sign}.")
