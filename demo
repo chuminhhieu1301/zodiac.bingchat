@@ -1,0 +1,39 @@
+Dưới đây là các dòng code cụ thể cho thuật toán tạo ra một con bot đưa ra các câu trả lời về cung hoàng đạo dựa trên thông tin ngày tháng năm sinh và họ tên của người dùng:
+
+```python
+import datetime
+import pandas as pd
+
+# Nhập thông tin ngày tháng năm sinh và họ tên của người dùng
+dob = input("Nhập ngày tháng năm sinh của bạn (dd/mm/yyyy): ")
+name = input("Nhập họ tên của bạn: ")
+
+# Chuyển đổi thông tin ngày tháng năm sinh thành đối tượng datetime
+dob = datetime.datetime.strptime(dob, "%d/%m/%Y")
+
+# Tính toán ngày sinh của người dùng
+day_of_birth = dob.strftime("%d")
+month_of_birth = dob.strftime("%m")
+
+# Tạo một bảng dữ liệu chứa thông tin về cung hoàng đạo
+zodiac_signs = pd.read_csv("https://raw.githubusercontent.com/BingHongLy/Celestial-Bot/main/zodiac_signs.csv")
+
+# Tìm kiếm cung hoàng đạo của người dùng dựa trên ngày sinh của họ
+zodiac_sign = zodiac_signs[(zodiac_signs["Start Month"] == int(month_of_birth) and zodiac_signs["Start Day"] <= int(day_of_birth)) or (zodiac_signs["End Month"] == int(month_of_birth) and zodiac_signs["End Day"] >= int(day_of_birth))]["Zodiac Sign"].values[0]
+
+# Trả về câu trả lời cho người dùng về cung hoàng đạo của họ
+print(f"Xin chào {name}, cung hoàng đạo của bạn là {zodiac_sign}.")
+```
+
+Lưu ý rằng đây chỉ là một thuật toán đơn giản để giúp bạn bắt đầu. Nếu bạn muốn tạo một con bot hoàn chỉnh, bạn có thể sử dụng các thư viện NLP và các mô hình học máy để tạo ra các câu trả lời phức tạp hơn. Chúc may mắn!
+
+Source: Conversation with Bing, 12/18/2023
+(1) Hướng Dẫn Lập Trình Chatbot Với Python - CodeLearn. https://codelearn.io/sharing/huong-dan-lap-trinh-chatbot-voi-python.
+(2) [ChatterBot] Thư viện chatbot hay ho dành cho Python| phần 1 - Viblo. https://viblo.asia/p/chatterbot-thu-vien-chatbot-hay-ho-danh-cho-python-phan-1-ByEZkJa4KQ0.
+(3) ChatGPT: Tự động hóa một vài tác vụ bằng Python. https://intech.vietnamworks.com/article/tu-dong-hoa-mot-vai-tac-vu-bang-python-chat-gpt.
+(4) Hướng dẫn 7 cách tạo Chatbot miễn phí cho người mới bắt đầu. https://atpacademy.vn/cach-tao-chatbot-mien-phi/.
+(5) Hướng dẫn viết thuật toán giải quyết các vấn đề trong lập trình. https://codegym.vn/blog/huong-dan-viet-thuat-toan-giai-quyet-cac-van-de-trong-lap-trinh/.
+(6) Chat GPT là gì? Cách sử dụng siêu AI ChatGPT | TopOnSeek. https://www.toponseek.com/blogs/chatgpt-la-gi/.
+(7) Viết yêu cầu (Prompt) và cách sử dụng ChatGPT hiệu quả. https://news.appotapay.com/viet-yeu-cau-prompt-va-cach-su-dung-chatgpt-hieu-qua-2633/.
+(8) GitHub Copilot: Công cụ tự động viết code bằng trí tuệ nhân tạo. https://anonyviet.com/github-copilot-cong-cu-tu-dong-viet-code-bang-tri-tue-nhan-tao/.
+(9) Tự tạo Chatbot ChatGPT bằng Python cho riêng mình - AnonyViet. https://anonyviet.com/tu-tao-chatbot-chatgpt-bang-python-cho-rieng-minh/.
